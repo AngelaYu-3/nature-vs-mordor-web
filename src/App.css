@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('startBackground.png');
+  background-color: grey;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

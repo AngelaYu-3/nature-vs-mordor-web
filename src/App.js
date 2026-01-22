@@ -267,27 +267,28 @@ function App() {
                 entity.health -= damageDealt;
                 target.remainingPower -= damageDealt;
 
+                // Check if trap is depleted
                 if (target.remainingPower <= 0) {
-                  // Trap destroyed, enemy moves in
+                  newGrid[row][targetCol] = null; // Remove trap
+                }
+
+                // Check if enemy died
+                if (entity.health <= 0) {
+                  newGrid[row][col] = null; // Remove dead enemy
+                  setScore(prev => prev + 10);
+                } else if (target.remainingPower <= 0) {
+                  // Trap destroyed but enemy survived - move enemy into that cell
                   newGrid[row][targetCol] = entity;
                   newGrid[row][col] = null;
                   moved[row][targetCol] = true;
-                } else {
-                  // Trap survives, enemy blocked
-                  if (entity.health <= 0) {
-                    newGrid[row][col] = null;
+
+                  if (targetCol === 0) {
+                    setGameOver(true);
                   }
                 }
-
-                if (entity.health <= 0) {
-                  setScore(prev => prev + 10);
-                }
-
-                if (targetCol === 0 && newGrid[row][targetCol] && newGrid[row][targetCol].type === ENTITY_TYPES.ENEMY) {
-                  setGameOver(true);
-                }
+                // If trap still exists and enemy still alive, enemy stays in place
               } else if (!target) {
-                // Move left
+                // Move left into empty cell
                 newGrid[row][targetCol] = entity;
                 newGrid[row][col] = null;
                 moved[row][targetCol] = true;
