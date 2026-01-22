@@ -1,38 +1,276 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #8b5a2b;
+}
+
 .App {
-  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Start Screen */
+.start-screen {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-image: url('startBackground.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  position: relative;
+}
+
+.start-screen h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.start-button {
+  font-size: 1.5rem;
+  padding: 1rem 3rem;
+  background-color: #edece3;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.start-button:hover {
+  transform: scale(1.1);
+}
+
+/* Top Panel */
+.top-panel {
+  background-color: #228b22;
+  padding: 1rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.sun-display {
+  color: #ffd700;
+}
+
+.restart-button {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.restart-button:hover {
+  background-color: #f57c00;
+}
+
+/* Game Container */
+.game-container {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Side Panels */
+.plant-panel,
+.powerup-panel {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.plant-panel h3,
+.powerup-panel h3 {
+  color: white;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.plant-button,
+.powerup-button {
+  padding: 0.5rem;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #8bc34a;
+  color: black;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.powerup-button {
+  border-color: #4caf50;
+  background-color: #4caf50;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.plant-button:hover,
+.powerup-button:hover {
+  transform: scale(1.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.plant-button.selected,
+.powerup-button.selected {
+  border-color: #ffd700;
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.plant-button .cost,
+.powerup-button .cost {
+  font-weight: bold;
+  margin-top: 0.25rem;
+}
+
+.plant-button .small,
+.powerup-button .small {
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+/* Board */
+.board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem;
+  background-color: #8b5a2b;
+  border-radius: 10px;
+}
+
+.board-row {
+  display: flex;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.cell {
+  flex: 1;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 80px;
+}
+
+.cell:hover {
+  border-color: #ffd700;
+  transform: scale(1.05);
+}
+
+.cell-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell-content .health {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  margin-bottom: 0.2rem;
+}
+
+.cell-content .emoji {
+  font-size: 2rem;
+}
+
+/* Game Over Modal */
+.game-over-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-content button {
+  margin: 0 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content button:first-of-type {
+  background-color: #4caf50;
+  color: white;
+}
+
+.modal-content button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  .plant-panel,
+  .powerup-panel {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .cell-content .emoji {
+    font-size: 1.5rem;
   }
 }
