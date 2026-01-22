@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/nature-vs-mordor-web/static/css/main.2ad6debc.css",
+    "main.js": "/nature-vs-mordor-web/static/js/main.1157bf9b.js",
+    "static/js/453.7297308f.chunk.js": "/nature-vs-mordor-web/static/js/453.7297308f.chunk.js",
+    "index.html": "/nature-vs-mordor-web/index.html",
+    "main.2ad6debc.css.map": "/nature-vs-mordor-web/static/css/main.2ad6debc.css.map",
+    "main.1157bf9b.js.map": "/nature-vs-mordor-web/static/js/main.1157bf9b.js.map",
+    "453.7297308f.chunk.js.map": "/nature-vs-mordor-web/static/js/453.7297308f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2ad6debc.css",
+    "static/js/main.1157bf9b.js"
+  ]
+}
